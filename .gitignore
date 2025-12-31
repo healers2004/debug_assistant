@@ -1,0 +1,18 @@
+# Build artifacts
+*.o
+*.exe
+*.out
+auto_analyze
+automotive_failure_analyzer/auto_analyze
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
