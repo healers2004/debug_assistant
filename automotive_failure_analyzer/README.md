@@ -66,4 +66,3 @@ make clean
 - C11 compatible compiler (gcc recommended)
 - POSIX-compliant system
 - Make utility
-
