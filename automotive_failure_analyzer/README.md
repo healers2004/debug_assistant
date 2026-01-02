@@ -9,14 +9,6 @@ A C11, POSIX-only CLI tool for analyzing Linux process failures using determinis
 
 ## Design Philosophy
 
-This tool demonstrates **systems-level understanding** of Linux process failures:
-
-- **Deterministic**: Rule-based logic, no ML/heuristics - predictable and debuggable
-- **Reliability Hierarchy**: Signal > errno > logs (reflects real-world evidence quality)
-- **Explicit over Implicit**: Switch statements, enums, static tables - no hidden magic
-- **Educational Value**: Code demonstrates Linux systems understanding, not clever tricks
-- **Production-Ready**: Clean compilation with `-Wall -Wextra`, defensive error handling
-
 The architecture mirrors real debugging workflows: check crash signal first (most definitive), then errno (context-specific), then logs (fallback evidence).
 
 ## Building
