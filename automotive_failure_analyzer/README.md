@@ -2,6 +2,9 @@
 
 A C-based CLI tool for analyzing Linux process failures in automotive subsystems.
 
+## Versioning
+- v1.0: Rule-based Linux failure analysis using signals, errno, and log keywords
+
 ## Overview
 
 This tool accepts POSIX signals, errno values, and log files to output failure classifications and root causes using rule-based logic.
