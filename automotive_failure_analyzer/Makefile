@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -std=c11 -Iinclude
 TARGET = auto_analyze
 SRCDIR = src
 INCDIR = include
-SOURCES = $(SRCDIR)/main.c $(SRCDIR)/signal_analyzer.c $(SRCDIR)/errno_mapper.c $(SRCDIR)/log_parser.c $(SRCDIR)/failure_rules.c
+SOURCES = $(SRCDIR)/main.c $(SRCDIR)/signal_analyzer.c $(SRCDIR)/errno_mapper.c $(SRCDIR)/log_parser.c $(SRCDIR)/failure_rules.c $(SRCDIR)/process_runner.c
 OBJECTS = $(SOURCES:.c=.o)
 
 .PHONY: all clean
