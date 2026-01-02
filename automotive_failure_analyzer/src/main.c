@@ -36,14 +36,22 @@ int main(int argc, char *argv[]) {
     const char *log_file = NULL;
     int opt;
 
-    // Parse command line arguments using getopt
+    /* Parse command line arguments using getopt */
     while ((opt = getopt(argc, argv, "s:e:l:")) != -1) {
         switch (opt) {
             case 's':
                 signal_num = atoi(optarg);
+                if (signal_num <= 0 || signal_num > 64) {
+                    fprintf(stderr, "Error: Invalid signal number: %d (valid range: 1-64)\n", signal_num);
+                    return EXIT_FAILURE;
+                }
                 break;
             case 'e':
                 err_val = atoi(optarg);
+                if (err_val < 0 || err_val > 255) {
+                    fprintf(stderr, "Error: Invalid errno value: %d (valid range: 0-255)\n", err_val);
+                    return EXIT_FAILURE;
+                }
                 break;
             case 'l':
                 log_file = optarg;
@@ -54,7 +62,14 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Initialize modules and analyze failure
+    /* Validate that at least one input was provided */
+    if (signal_num == -1 && err_val == 0 && log_file == NULL) {
+        fprintf(stderr, "Error: At least one of -s, -e, or -l must be provided\n\n");
+        print_usage(argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    /* Initialize modules and analyze failure */
     FailureReport report;
     int result = evaluate_failure(signal_num, err_val, log_file, &report);
 
@@ -63,12 +78,12 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    // Print output
-    printf("=== Failure Analysis Report ===\n");
+    /* Print structured output */
+    printf("\n=== Failure Analysis Report ===\n\n");
     printf("Failure Type: %s\n", failure_type_to_string(report.failure_type));
-    printf("Root Cause: %s\n", report.root_cause);
-    printf("Debug Steps: %s\n", report.debug_steps);
-    printf("===============================\n");
+    printf("Root Cause:   %s\n", report.root_cause);
+    printf("\nDebug Steps:\n%s\n", report.debug_steps);
+    printf("================================\n\n");
 
     return EXIT_SUCCESS;
 }
